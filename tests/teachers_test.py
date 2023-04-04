@@ -100,3 +100,22 @@ def test_grade_assignment_draft_assignment(client, h_teacher_1):
     data = response.json
 
     assert data['error'] == 'FyleError'
+
+# Added a test case a graded assignment caanot be changed
+def test_grade_assignment_graded_assignment(client, h_teacher_1):
+    """
+    failure case: an assignment cannot be regraded
+    """
+    response = client.post(
+        '/teacher/assignments/grade',
+        headers=h_teacher_1
+        , json={
+            "id": 2,
+            "grade": "B"
+        }
+    )
+
+    assert response.status_code == 400
+    data = response.json
+
+    assert data['error'] == 'FyleError'

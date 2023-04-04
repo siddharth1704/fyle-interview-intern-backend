@@ -41,7 +41,7 @@ def test_post_assignment_student_1(client, h_student_1):
     assert data['state'] == 'DRAFT'
     assert data['teacher_id'] is None
 
-
+# this test case fails when we re run it as the assignment is already submitted so kindly add the checks
 def test_submit_assignment_student_1(client, h_student_1):
     response = client.post(
         '/student/assignments/submit',
@@ -50,7 +50,7 @@ def test_submit_assignment_student_1(client, h_student_1):
             'id': 2,
             'teacher_id': 2
         })
-
+    print(response.json)
     assert response.status_code == 200
 
     data = response.json['data']
@@ -68,6 +68,7 @@ def test_assingment_resubmitt_error(client, h_student_1):
             'teacher_id': 2
         })
     error_response = response.json
+    print(response)
     assert response.status_code == 400
     assert error_response['error'] == 'FyleError'
     assert error_response["message"] == 'only a draft assignment can be submitted'
