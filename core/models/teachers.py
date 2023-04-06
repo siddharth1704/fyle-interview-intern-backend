@@ -10,4 +10,4 @@ class Teacher(db.Model):
     updated_at = db.Column(db.TIMESTAMP(timezone=True), default=helpers.get_utc_now, nullable=False, onupdate=helpers.get_utc_now)
 
     def __repr__(self):
-        return '<Teacher %r>' % self.id
+        return '<Teacher %r>' % self.id 
